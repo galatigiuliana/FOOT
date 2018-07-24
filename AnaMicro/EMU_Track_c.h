@@ -269,6 +269,7 @@ public:
     
 private:
     Int_t fid_event;
+    Int_t fid_stack;
     
     vector<EMU_VolumeTrack> ft;
     vector<EMU_BaseTrack> fbt;

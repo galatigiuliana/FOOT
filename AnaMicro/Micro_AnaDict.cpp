@@ -638,7 +638,7 @@ namespace {
     };
     static const char* includePaths[] = {
 "/Applications/root_v6.12.04/include",
-"/Users/Giuliana/Desktop/PhD/FOOT/FOOT_Analysis/AnaMicro/",
+"/Users/Giuliana/Desktop/PhD/FOOT/Git_FOOT/AnaMicro/",
 0
     };
     static const char* fwdDeclCode = R"DICTFWDDCLS(
