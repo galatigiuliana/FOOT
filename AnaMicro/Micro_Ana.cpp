@@ -99,7 +99,7 @@ Int_t ECC_ReadMicro(const char* filein, TFile *fileout){//last update 4/5/18, A.
             // cout << "Set event "<<id_event<<endl;
         }//if
         
-        if(id_fluka!=3&&id_fluka!=4){//skip e
+        if(id_fluka!=3&&id_fluka!=4){//skip e+e-
             
             Double_t angle = acos(pz_micro/p_micro);
             angle *= RAD2DEG;
@@ -154,7 +154,7 @@ void ECC_DefineBaseTrack(){//last update 18/1/18,AP
     EMU_BaseTrack bt;
     Int_t idpart = -99, layer = -1, ngr = -1, countbase = 0;
     long long int nvph = -1;
-    Double_t x, y, z, px, py, pz, p, E, Ekin;
+    Double_t x=0, y=0, z=0, px=0, py=0, pz=0, p=0, E=0, Ekin=0;
     Double_t base_angle = .0;
     Int_t id_micro =0, id_event=0;
     
@@ -188,7 +188,7 @@ void ECC_DefineBaseTrack(){//last update 18/1/18,AP
                         p = ((Events.at(i)).GetMicroTrack(im)).GetP();
                         E = ((Events.at(i)).GetMicroTrack(im)).GetE();
                         Ekin = ((Events.at(i)).GetMicroTrack(im)).GetEkin();
-                        bt.SetPXYZ(px,py,px);
+                        bt.SetPXYZ(px,py,pz);
                         bt.SetP(p);
                         bt.SetE(E); bt.SetEkin(Ekin);
                     }
@@ -221,6 +221,9 @@ void ECC_DefineBaseTrack(){//last update 18/1/18,AP
             E = ((Events.at(i)).GetMicroTrack(im)).GetE();
             Ekin = ((Events.at(i)).GetMicroTrack(im)).GetEkin();
             
+            if (((Events.at(i)).GetMicroTrack(im)).GetFlukaID()==-2) cout << "bt: " << ((Events.at(i)).GetMicroTrack(im)).GetFlukaID() << endl;
+
+            
         }//for im
         
         // cout <<"Event "<<(Events.at(i)).GetID()<<" nr of basetracks = "<<((Events.at(i)).GetBaseTracks()).size()<<endl;
@@ -235,7 +238,7 @@ void ECC_DefineVolumeTrack(){//last update 4/5/18, AP
     if(!Events.size()) { cout << "None event to be processed!" << endl << "Exiting from ECC_DefineVolumeTrack..."<<endl; return;}
     
     EMU_VolumeTrack vt;
-    Int_t id_part = -99, id_layer=-99, id_parent=-99, id_fluka_part=-99, counttrack = 0;
+    Int_t id_part = -99, id_layer=-99, id_parent=-99, id_fluka_part=-99, id_fluka_parent=-99, counttrack = 0;
     //Double_t linear_range=-99;
     //cout << "Events.size() " << Events.size() << endl;
     for(unsigned int i = 0; i<Events.size(); i++){
@@ -299,11 +302,14 @@ void ECC_DefineVolumeTrack(){//last update 4/5/18, AP
             }
             
             id_part = ((Events.at(i)).GetBaseTrack(ib)).GetIDPart();
+            id_fluka_parent = ((Events.at(i)).GetBaseTrack(ib)).GetParentFlukaID();
             id_fluka_part = ((Events.at(i)).GetBaseTrack(ib)).GetFlukaID();
             id_parent = ((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart();
             id_layer = ((Events.at(i)).GetBaseTrack(ib)).GetLayer();
             
             // } // chiudo if sugli elettroni e positroni
+            
+            if (id_fluka_part==-2) cout << "vt: " << id_fluka_part << endl;
             
         }//for ib
         
