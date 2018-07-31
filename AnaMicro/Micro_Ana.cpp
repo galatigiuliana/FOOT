@@ -52,6 +52,8 @@ Int_t ECC_ReadMicro(const char* filein, TFile *fileout){//last update 4/5/18, A.
     unsigned long long int VPH = -1;
     Double_t x_micro = .0, y_micro = .0, z_micro = .0, sx_micro = -99., sy_micro = -99., px_micro = -99., py_micro = -99., pz_micro = -99., p_micro = -99., E_micro = -99., Ekin_micro = -99.;
     
+    Int_t id_stack_prec = -1, id_layer_prec = -1;
+    
     MicroTrackTree->SetBranchAddress("id_micro",&id_micro);
     MicroTrackTree->SetBranchAddress("id_event",&id_event);
     MicroTrackTree->SetBranchAddress("id_stack",&id_stack);
@@ -107,6 +109,12 @@ Int_t ECC_ReadMicro(const char* filein, TFile *fileout){//last update 4/5/18, A.
             mt.SetID(id_micro);
             mt.SetEvent(id_event);
             mt.SetStack(id_stack);
+            
+            if(id_stack==2&&id_stack_prec==1&&id_layer==id_layer_prec+1) {
+                mt.SetStack(2);
+                cout << "Event " << id_event << ": id_stack del layer " << id_layer << "resettato a 2" << endl;
+            }
+            
             mt.SetLayer(id_layer);
             mt.SetGrains(grains);
             mt.SetVPH(VPH);
@@ -132,6 +140,9 @@ Int_t ECC_ReadMicro(const char* filein, TFile *fileout){//last update 4/5/18, A.
         }
         //cout << id_event << "\t" << id_micro << " x: " << mt.GetX() << endl;
         evt_id = id_event;
+        
+        id_stack_prec=id_stack;
+        id_layer_prec=id_layer;
         
     }//for i
     
