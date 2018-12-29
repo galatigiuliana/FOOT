@@ -216,9 +216,9 @@ void ECC_DefineBaseTrack(){//last update 18/1/18,AP
                 
                 (Events.at(i)).SetBaseTrack(bt); bt.Clear();
             }//if
-//            else{
-//                cout << (Events.at(i)).GetID() << "\tmicro (outside if): " << im << "\tlayer: " << ((Events.at(i)).GetMicroTrack(im)).GetLayer() << "\tpart: " << ((Events.at(i)).GetMicroTrack(im)).GetIDPart() << "\tfluka: " << ((Events.at(i)).GetMicroTrack(im)).GetFlukaID() << "\tparent id: " << ((Events.at(i)).GetMicroTrack(im)).GetParentIDPart() << "\tparent fluka: " << ((Events.at(i)).GetMicroTrack(im)).GetParentFlukaID() << endl;
-//            }
+            else{
+                cout << (Events.at(i)).GetID() << "\tmicro (outside if): " << im << "\tlayer: " << ((Events.at(i)).GetMicroTrack(im)).GetLayer() << "\tpart: " << ((Events.at(i)).GetMicroTrack(im)).GetIDPart() << "\tfluka: " << ((Events.at(i)).GetMicroTrack(im)).GetFlukaID() << "\tparent id: " << ((Events.at(i)).GetMicroTrack(im)).GetParentIDPart() << "\tparent fluka: " << ((Events.at(i)).GetMicroTrack(im)).GetParentFlukaID() << endl;
+            }
             
             id_event = (Events.at(i)).GetID();
             id_micro = ((Events.at(i)).GetMicroTrack(im)).GetID();
@@ -282,7 +282,7 @@ void ECC_DefineVolumeTrack(){//last update 4/5/18, AP
                 vt.SetE(((Events.at(i)).GetBaseTrack(ib)).GetE());
                 vt.SetEkin(((Events.at(i)).GetBaseTrack(ib)).GetEkin());
             }//if
-            else if(ib&&id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&id_parent==((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()>id_layer){
+            else if(ib&&id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&(id_parent==((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart()||id_part==((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart())&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()>id_layer){
             
                 vt.SetBaseTrack((Events.at(i)).GetBaseTrack(ib));
                 
@@ -291,7 +291,7 @@ void ECC_DefineVolumeTrack(){//last update 4/5/18, AP
                     vt.Clear();
                 }
             }
-            else if(ib&&((id_fluka_part!=((Events.at(i)).GetBaseTrack(ib)).GetFlukaID())||(id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()<=id_layer&&id_parent==((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart())||((id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()<=id_layer&&id_fluka_parent!=((Events.at(i)).GetBaseTrack(ib)).GetParentFlukaID()))||((id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()>id_layer&&id_parent!=((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart())))){
+            else if(ib&&((id_fluka_part!=((Events.at(i)).GetBaseTrack(ib)).GetFlukaID())||(id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()<=id_layer&&id_parent==((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart())||((id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()<=id_layer&&id_fluka_parent!=((Events.at(i)).GetBaseTrack(ib)).GetParentFlukaID()))||((id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()>id_layer&&(id_parent!=((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart()&&id_part!=((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart()))))){
                 (Events.at(i)).SetTrack(vt);
                 vt.Clear();
                 
@@ -315,10 +315,10 @@ void ECC_DefineVolumeTrack(){//last update 4/5/18, AP
                 
                 vt.SetBaseTrack((Events.at(i)).GetBaseTrack(ib));
             }
-//            else{
-//                cout << (Events.at(i)).GetID() << " non sono entrato da nessuna parte: id " << ((Events.at(i)).GetBaseTrack(ib)).GetID() << "\tfluka " << ((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()<< "\tparent id " << ((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart() << "\tparent fluka " << ((Events.at(i)).GetBaseTrack(ib)).GetParentFlukaID() << "\tlayer " << ((Events.at(i)).GetBaseTrack(ib)).GetLayer() << endl;
-//                cout << "\t\t\t\t\t prec: " << id_part << "\t\t" << id_fluka_part << "\t\t" << id_fluka_parent << "\t\t" << id_fluka_parent << "\t\t" << id_layer << endl;
-//            }
+            else{
+                cout << (Events.at(i)).GetID() << " non sono entrato da nessuna parte: id " << ((Events.at(i)).GetBaseTrack(ib)).GetID() << "\tfluka " << ((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()<< "\tparent id " << ((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart() << "\tparent fluka " << ((Events.at(i)).GetBaseTrack(ib)).GetParentFlukaID() << "\tlayer " << ((Events.at(i)).GetBaseTrack(ib)).GetLayer() << endl;
+                cout << "\t\t\t\t\t prec: " << id_part << "\t\t" << id_fluka_part << "\t\t" << id_fluka_parent << "\t\t" << id_fluka_parent << "\t\t" << id_layer << endl;
+            }
             
             id_part = ((Events.at(i)).GetBaseTrack(ib)).GetIDPart();
             id_fluka_parent = ((Events.at(i)).GetBaseTrack(ib)).GetParentFlukaID();
