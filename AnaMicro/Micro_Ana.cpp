@@ -174,7 +174,7 @@ void ECC_DefineBaseTrack(){//last update 18/1/18,AP
         countbase = 0;
         for(unsigned int im = 0; im<((Events.at(i)).GetMicroTracks()).size();im++){
             if(im&&layer==((Events.at(i)).GetMicroTrack(im)).GetLayer()&&idpart==((Events.at(i)).GetMicroTrack(im)).GetIDPart()){
-                cout << (Events.at(i)).GetID() << "\tmicro (inside if): " << im << "\tlayer: " << ((Events.at(i)).GetMicroTrack(im)).GetLayer() << "\tpart: " << ((Events.at(i)).GetMicroTrack(im)).GetIDPart() << "\tfluka: " << ((Events.at(i)).GetMicroTrack(im)).GetFlukaID() << "\tparent id: " << ((Events.at(i)).GetMicroTrack(im)).GetParentIDPart() << "\tparent fluka: " << ((Events.at(i)).GetMicroTrack(im)).GetParentFlukaID() << endl;
+//                cout << (Events.at(i)).GetID() << "\tmicro (inside if): " << im << "\tlayer: " << ((Events.at(i)).GetMicroTrack(im)).GetLayer() << "\tpart: " << ((Events.at(i)).GetMicroTrack(im)).GetIDPart() << "\tfluka: " << ((Events.at(i)).GetMicroTrack(im)).GetFlukaID() << "\tparent id: " << ((Events.at(i)).GetMicroTrack(im)).GetParentIDPart() << "\tparent fluka: " << ((Events.at(i)).GetMicroTrack(im)).GetParentFlukaID() << endl;
 
                 countbase++;
                 bt.SetID(countbase);
