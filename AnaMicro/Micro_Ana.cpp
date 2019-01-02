@@ -291,7 +291,7 @@ void ECC_DefineVolumeTrack(){//last update 4/5/18, AP
                     vt.Clear();
                 }
             }
-            else if(ib&&((id_fluka_part!=((Events.at(i)).GetBaseTrack(ib)).GetFlukaID())||(id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()<=id_layer&&id_parent==((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart())||((id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()<=id_layer&&id_fluka_parent!=((Events.at(i)).GetBaseTrack(ib)).GetParentFlukaID()))||((id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()>id_layer&&id_parent!=((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart())))){
+            else {//if(ib&&((id_fluka_part!=((Events.at(i)).GetBaseTrack(ib)).GetFlukaID())||(id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()<=id_layer&&id_parent==((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart())||((id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()<=id_layer&&id_fluka_parent!=((Events.at(i)).GetBaseTrack(ib)).GetParentFlukaID()))||((id_fluka_part==((Events.at(i)).GetBaseTrack(ib)).GetFlukaID()&&((Events.at(i)).GetBaseTrack(ib)).GetLayer()>id_layer&&id_parent!=((Events.at(i)).GetBaseTrack(ib)).GetParentIDPart())))){
                 (Events.at(i)).SetTrack(vt);
                 vt.Clear();
                 
