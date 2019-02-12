@@ -110,12 +110,12 @@ Int_t ECC_ReadMicro(const char* filein, TFile *fileout){//last update 4/5/18, A.
             mt.SetEvent(id_event);
             mt.SetStack(id_stack);
             
-            if(id_layer==29) {
-                mt.SetStack(2);
-                if(ver==0) {std::cerr << "Event " << id_event << ": id_stack del layer " << id_layer << " resettato a 2" << endl;
-                    ver=1;
-                }
-            }
+//            if(id_layer==29) {
+//                mt.SetStack(2);
+//                if(ver==0) {std::cerr << "Event " << id_event << ": id_stack del layer " << id_layer << " resettato a 2" << endl;
+//                    ver=1;
+//                }
+//            }
             
             mt.SetLayer(id_layer);
             mt.SetGrains(grains);
